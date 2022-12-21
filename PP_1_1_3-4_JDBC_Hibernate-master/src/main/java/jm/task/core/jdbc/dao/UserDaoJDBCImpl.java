@@ -55,12 +55,11 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void removeUserById(long id) {
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement
-                ("DELETE FROM mydptest.users WHERE id")) {
-
-            preparedStatement.executeUpdate();
-            System.out.println("User удален");
-        } catch (SQLException e) {
+       try {    PreparedStatement st = connection.prepareStatement("DELETE FROM Table WHERE name = ?");
+           st.setString(1, String.valueOf(id));
+           st.executeUpdate();
+    }
+         catch (SQLException e) {
             e.printStackTrace();
         }
     }
